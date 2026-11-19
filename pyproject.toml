@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-can-csscan-mux"
+version = "2026.11.19"
+authors = [
+    { name="CSS Electronics" },
+    { email="contact@csselectronics.com" },
+]
+description = "Mux/demux CAN data to/from the CSS Electronics CANmod.router through python-can"
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    'python-can >= 4.6.0',
+]
+
+[project.optional-dependencies]
+test = [
+    'pytest >= 8.0',
+]
+hardware = [
+    'pytest >= 8.0',
+    'python-can-cansub >= 2026.09.28',
+]
+
+# Ship the README inside the installed package so it can be found and read locally.
+[tool.hatch.build.targets.wheel.force-include]
+"README.md" = "python_can_csscan_mux/README.md"
+
+[project.urls]
+"Homepage" = "https://csselectronics.com/"
+"Source" = "https://github.com/CSS-Electronics/python-can-csscan-mux"
+"Changelog" = "https://github.com/CSS-Electronics/python-can-csscan-mux/blob/master/CHANGELOG.md"
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
+markers = [
+  "hardware: live tests through a CANmod.router (see tests/test_hardware.py)",
+]
